@@ -7,10 +7,16 @@ on:
         required: true
         type: string
         default: dist
+    outputs:
+      result:
+        description: The result of the successful deploy message
+        value: ${{jobs.outputting-build-file.outputs.outcome}}
 
 jobs:
   outputting-build-file:
     runs-on: ubuntu-latest
+    outputs:
+      outcome: ${{steps.set-result.outputs.step-result}}
     steps:
       - name: Get build artifacts
         uses: actions/download-artifact@v4
@@ -19,4 +25,5 @@ jobs:
       - name: Output contents
         run: ls
       - name: Workflow complete
-        run: echo "Resuable workflow ran"
+        id: set-result
+        run: echo "step-result=Workflow ran" >> $GITHUB_OUTPUT
