@@ -1,0 +1,22 @@
+name: Reusable Workflow
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: Artifact name description
+        required: true
+        type: string
+        default: dist
+
+jobs:
+  outputting-build-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{inputs.artifact-name}}
+      - name: Output contents
+        run: ls
+      - name: Workflow complete
+        run: echo "Resuable workflow ran"
