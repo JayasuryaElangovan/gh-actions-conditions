@@ -27,3 +27,8 @@ jobs:
       - name: Workflow complete
         id: set-result
         run: echo "step-result=Workflow ran" >> $GITHUB_OUTPUT
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call reusable workflow
+        run: echo 'Hello there'
