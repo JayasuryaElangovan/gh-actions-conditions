@@ -24,6 +24,8 @@ jobs:
           name: ${{inputs.artifact-name}}
       - name: Output contents
         run: ls
+      - name: Outputting git hub output
+        run: echo "$GITHUB_OUTPUT"
       - name: Workflow complete
         id: set-result
         run: echo "step-result=Workflow ran" >> $GITHUB_OUTPUT
